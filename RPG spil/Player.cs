@@ -3,20 +3,26 @@
 namespace RPG_spil
 {
 
-	internal class Player : Character
+	public class Player : Character
 	{
 		//Fields
 		private int _level;
 		private int _xp;
 		private List<string> _inventory;
 
-		//Constructor
-		public Player(string name, int health, int attackDamage, int defence)
+        public int Health
+        {
+            get { return _health; }
+        }
+
+        //Constructor
+        public Player(string name, int health, int attackDamage, int defence)
 			: base (name, health, attackDamage, defence)
 		{
 			_level = 1;
 			_xp = 0;
 			_inventory = new List<string>();
+			_inventory.Add("Health Potion");
 
 		}
 
@@ -46,7 +52,23 @@ namespace RPG_spil
 			Console.WriteLine($"New stats--> Health: {_health}, Attack: {_attackDamage}, Defence: {_defence}");
 		}
 
-		public void AddItem(string item)
+		public void UsePotion()
+		{
+			if (_inventory.Contains("Health Potion"))
+			{
+				_health += 20;
+				_inventory.Remove("Health Potion");
+				Console.WriteLine($"{_name} used a Health Potion and restored 20 HP! Current health:{_health}");
+			}
+			else
+			{
+				Console.WriteLine("You dont have any Health Potions");
+			}
+		}
+
+        
+
+        public void AddItem(string item)
 			{ 
 				_inventory.Add( item );
 				Console.WriteLine($"{_name} picked up {item}");

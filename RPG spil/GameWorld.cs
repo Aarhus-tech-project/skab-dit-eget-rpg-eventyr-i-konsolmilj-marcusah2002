@@ -11,8 +11,8 @@ namespace RPG_spil
         {
             _locations = new Dictionary<string, Location>
           {
-            {"City", new Location("The City", "a lively city filled regular people.") },
-            {"Forest", new Location("The Forest", "is unpredictable and dangerous. Be careful!") }
+            {"city", new Location("The City.", "A big city filled with regular people.") },
+            {"forest", new Location("The Forest", "It is unpredictable and dangerous. Be careful!") }
           };
 
 
@@ -20,9 +20,12 @@ namespace RPG_spil
 
         public void Travel(string locationName)
         {
-            if (_locations.ContainsKey(locationName))
+
+            string formattedLocation = locationName.ToLower();
+
+            if (_locations.ContainsKey(formattedLocation))
             {
-                _locations[locationName].Enter();
+                _locations[formattedLocation].Enter();
             }
             else
             {

@@ -1,44 +1,51 @@
 ﻿using System;
+using RPG_spil;
 
-public class Character
+namespace RPG_spil
 {
-	//Fields
-	private string name;
-	private int health;
-	private int atttackDamage;
-	private int defense;
 
-	//Constructor
-	public Character(string name, int health, int attackDamage, int defense)
-	{
-		_name = name;
-		_health = health;
-		_attackDamage = attackDamage;
-		_defence = defense;
+    public class Character
+    {
+        //Fields
+        protected string _name;
+        protected int _health;
+        protected int _attackDamage;
+        protected int _defence;
+
+        public string Name { get { return _name; } }
+        public int Health { get { return _health; } }
+
+        //Constructor
+        public Character(string name, int health, int attackDamage, int defence)
+        {
+            _name = name;
+            _health = health;
+            _attackDamage = attackDamage;
+            _defence = defence;
 
 
-	}
+        }
 
-	//Methods
-	public int Attack()
-	{
-		return attackDamage;
-	}
+        //Methods
+        public void Attack(Character target)
+        {
 
-	public void TakeDamage(int damage)
-	{
-		int actualDamage = damage - _defense;
-		if (actualDamage < 0)
-		{
-			actualDamage = 0;
-		}
+            int damageDealt = _attackDamage - target._defence;
+            if (damageDealt < 1) damageDealt = 1;
 
-		_health -= actualDamage;
-		Console.WriteLine($"{_name} takes {actualDamage} damage! Health left: {_health}");
+            Console.WriteLine($"{_name} attacks {target.Name} for {damageDealt}");
+            target.TakeDamage(damageDealt);
+        }
 
-		if (_health <= 0)
-		{
-			Console.WriteLine($"{_name} has been defeated");
-		}
-	}
+        public void TakeDamage(int damageDealt)
+        {
+            _health -= damageDealt;  
+            Console.WriteLine($"{_name} takes {damageDealt} damage! Health left: {_health}");
+
+            
+        }
+    }
+
+
+
 }

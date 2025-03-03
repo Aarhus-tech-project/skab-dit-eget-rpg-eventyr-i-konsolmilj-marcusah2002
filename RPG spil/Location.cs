@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RPG_spil
 {
-    class Location
+   public class Location
     {
         public string Name { get; set; }
         public string Description { get;}
